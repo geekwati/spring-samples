@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="myConnection" class="org.example.db.MyConnection">
+		<constructor-arg name="driver" value="org.h2.Driver" />
+		<constructor-arg name="url" value="jdbc:h2:file:f:/db/myemail;AUTO_SERVER=TRUE" />
+		<constructor-arg name="userName" value="sa" />
+		<constructor-arg name="password" value="" />
+	</bean>
+	<bean id="h2DbUtil" class="org.example.db.H2DbUtil">
+		<property name="myConnection" ref="myConnection" />
+	</bean>
+	<bean id="utilTest" class="org.example.db.UtilTest">
+		<property name="h2DbUtil" ref="h2DbUtil" />
+	</bean>
+</beans>
